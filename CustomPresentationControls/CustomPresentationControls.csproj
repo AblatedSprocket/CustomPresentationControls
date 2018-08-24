@@ -150,6 +150,7 @@
     <Compile Include="SaveFileDialog.xaml.cs">
       <DependentUpon>SaveFileDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\NegatableBooleanToVisibilityConverter.cs" />
     <Compile Include="Utilities\ObservableObject.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
