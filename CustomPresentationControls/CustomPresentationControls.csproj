@@ -102,7 +102,6 @@
     <Compile Include="BusyIndicator.xaml.cs">
       <DependentUpon>BusyIndicator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Charts\ChartColors.cs" />
     <Compile Include="Charts\DataBin.cs" />
     <Compile Include="Charts\LineChartControl.cs" />
     <Compile Include="Charts\PieChartControl.cs" />

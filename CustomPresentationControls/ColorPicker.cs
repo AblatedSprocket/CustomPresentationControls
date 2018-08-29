@@ -98,7 +98,6 @@ namespace CustomPresentationControls
         }
         public ColorPicker()
         {
-            //Color = Colors.Red;
             Color = new SolidColorBrush(Colors.Red);
         }
         private static void OnRedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

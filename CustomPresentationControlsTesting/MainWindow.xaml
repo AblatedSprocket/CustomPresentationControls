@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomPresentationControlsTesting"
+        xmlns:chart="clr-namespace:CustomPresentationControls.Charts;assembly=CustomPresentationControls"
         xmlns:control="clr-namespace:CustomPresentationControls;assembly=CustomPresentationControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <control:AuthenticationView DataContext="{Binding ViewModel}"/>
+    <StackPanel>
+        <control:AuthenticationView DataContext="{Binding ViewModel}"/>
+        <chart:PieChartControl ItemsSource="{Binding Data}" Orientation="Vertical" LegendWidth="50" FigureSize="150"/>
+        <control:ColorPickerView/>
+    </StackPanel>
 </Window>

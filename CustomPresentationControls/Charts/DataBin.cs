@@ -4,12 +4,12 @@ using System.Windows.Media;
 
 namespace CustomPresentationControls.Charts
 {
-    class DataBin : ObservableObject
+    public class DataBin : ObservableObject
     {
         private string _name;
         private double _value;
         private Point _coordinates;
-        private Color _color;
+        private SolidColorBrush _color;
         public string Name
         {
             get { return _name; }
@@ -26,7 +26,7 @@ namespace CustomPresentationControls.Charts
                 OnPropertyChanged(ref _value, value);
             }
         }
-        public Color Color
+        public SolidColorBrush Color
         {
             get { return _color; }
             set

@@ -110,9 +110,9 @@ namespace CustomPresentationControls
         {
             CancelCommand = new RelayCommand(OnCanceled);
             CommitCommand = new RelayCommand(OnCommitted);
-            RedPick = Colors.Teal.R;
-            GreenPick = Colors.Teal.G;
-            BluePick = Colors.Teal.B;
+            RedPick = 0;
+            GreenPick = 0;
+            BluePick = 0;
         }
         #region Command Methods
         private void OnCanceled()

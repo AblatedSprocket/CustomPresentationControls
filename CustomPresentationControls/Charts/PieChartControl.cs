@@ -35,10 +35,22 @@ namespace CustomPresentationControls.Charts
                 UpdateChart();
             }
         }
+        public Orientation Orientation
+        {
+            get { return (Orientation)GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
+        }
+        public double LegendWidth
+        {
+            get { return (double)GetValue(LegendWidthProperty); }
+            set { SetValue(LegendWidthProperty, value); }
+        }
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(PieChartControl), new PropertyMetadata(OnItemsSourcePropertyChanged));
         public static readonly DependencyProperty FigureSizeProperty = DependencyProperty.Register("FigureSize", typeof(double), typeof(PieChartControl), new PropertyMetadata(OnFigureSizePropertyChanged));
+        public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register("Orientation", typeof(Orientation), typeof(PieChartControl), new PropertyMetadata(Orientation.Vertical));
+        public static readonly DependencyProperty LegendWidthProperty = DependencyProperty.Register("LegendWidth", typeof(double), typeof(PieChartControl), new PropertyMetadata(0.0));
         private Canvas Figure { get; set; }
-        public PieChartControl()
+        static PieChartControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PieChartControl), new FrameworkPropertyMetadata(typeof(PieChartControl)));
         }
@@ -49,7 +61,8 @@ namespace CustomPresentationControls.Charts
         }
         private void UpdateChart()
         {
-            if (ItemsSource is ObservableCollection<DataBin> data && Figure != null)
+            ObservableCollection<DataBin> stuff = ItemsSource as ObservableCollection<DataBin>;
+            if (ItemsSource is ObservableCollection<PieSegment> data && Figure != null)
             {
                 if (FigureSize == 0)
                 {
@@ -70,14 +83,14 @@ namespace CustomPresentationControls.Charts
                         Data = geometry,
                         Stroke = new SolidColorBrush(Colors.White),
                         StrokeThickness = 2,
-                        Fill = ChartColors.Colors[0]
+                        Fill = data[0].Color
                     };
                     Figure.Children.Add(path);
                 }
                 else
                 {
                     int i = 0;
-                    foreach (DataBin dataPoint in data)
+                    foreach (PieSegment dataPoint in data)
                     {
                         PathGeometry geometry = new PathGeometry();
                         double startAngle = consumedPie;
@@ -95,10 +108,11 @@ namespace CustomPresentationControls.Charts
                             Data = geometry,
                             Stroke = new SolidColorBrush(Colors.White),
                             StrokeThickness = 2,
-                            Fill = ChartColors.Colors[i]
+                            Fill = dataPoint.Color
                         };
                         Figure.Children.Add(path);
                         consumedPie = endAngle;
+                        i++;
                     }
                 }
             }
@@ -134,7 +148,7 @@ namespace CustomPresentationControls.Charts
             UpdateChart();
         }
     }
-    internal class PieSegment : ObservableObject
+    public class PieSegment : ObservableObject
     {
         private string _name;
         private double _value;
@@ -155,25 +169,25 @@ namespace CustomPresentationControls.Charts
             set { OnPropertyChanged(ref _color, value); }
         }
     }
-    internal class DataPointCollectionToPieSegmentCollectionConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is ObservableCollection<DataBin> data)
-            {
-                return data.Select((d, i) => new PieSegment
-                {
-                    Name = d.Name,
-                    Value = d.Value,
-                    Color = ChartColors.Colors[i]
-                });
-            }
-            return null;
-        }
+    //internal class DataPointCollectionToPieSegmentCollectionConverter : IValueConverter
+    //{
+    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        if (value is ObservableCollection<DataBin> data)
+    //        {
+    //            return data.Select((d, i) => new PieSegment
+    //            {
+    //                Name = d.Name,
+    //                Value = d.Value,
+    //                Color = ChartColors.Colors[i]
+    //            });
+    //        }
+    //        return null;
+    //    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 }
