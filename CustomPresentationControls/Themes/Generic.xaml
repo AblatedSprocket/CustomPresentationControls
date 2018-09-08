@@ -116,15 +116,13 @@
                                 MaxWidth ="{TemplateBinding MaxWidth}"
                                 MinHeight="{TemplateBinding MinHeight}"
                                 MinWidth="{TemplateBinding MinWidth}"
-                                Orientation="{TemplateBinding Orientation}"
                                 Width="{TemplateBinding Width}"
                                 Height="{TemplateBinding Height}">
                         <Canvas x:Name="Figure"/>
                         <ItemsControl x:Name="Legend"
                                       HorizontalAlignment="Center"
                                       VerticalAlignment="Center"
-                                      Width="{TemplateBinding LegendWidth}"
-                                      ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type chart:PieChartControl}}, Path=ItemsSource}">
+                                      ItemsSource="{TemplateBinding ItemsSource}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel HorizontalAlignment="Center"/>

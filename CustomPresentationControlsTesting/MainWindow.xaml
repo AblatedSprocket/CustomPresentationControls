@@ -10,7 +10,7 @@
         Title="MainWindow" Height="450" Width="800">
     <StackPanel>
         <control:AuthenticationView DataContext="{Binding ViewModel}"/>
-        <chart:PieChartControl ItemsSource="{Binding Data}" Orientation="Vertical" LegendWidth="50" FigureSize="150"/>
+        <chart:PieChartControl ItemsSource="{Binding Data}" FigureSize="150"/>
         <control:ColorPickerView/>
     </StackPanel>
 </Window>

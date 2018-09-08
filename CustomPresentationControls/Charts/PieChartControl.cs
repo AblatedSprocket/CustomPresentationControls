@@ -35,20 +35,8 @@ namespace CustomPresentationControls.Charts
                 UpdateChart();
             }
         }
-        public Orientation Orientation
-        {
-            get { return (Orientation)GetValue(OrientationProperty); }
-            set { SetValue(OrientationProperty, value); }
-        }
-        public double LegendWidth
-        {
-            get { return (double)GetValue(LegendWidthProperty); }
-            set { SetValue(LegendWidthProperty, value); }
-        }
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(PieChartControl), new PropertyMetadata(OnItemsSourcePropertyChanged));
         public static readonly DependencyProperty FigureSizeProperty = DependencyProperty.Register("FigureSize", typeof(double), typeof(PieChartControl), new PropertyMetadata(OnFigureSizePropertyChanged));
-        public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register("Orientation", typeof(Orientation), typeof(PieChartControl), new PropertyMetadata(Orientation.Vertical));
-        public static readonly DependencyProperty LegendWidthProperty = DependencyProperty.Register("LegendWidth", typeof(double), typeof(PieChartControl), new PropertyMetadata(0.0));
         private Canvas Figure { get; set; }
         static PieChartControl()
         {
